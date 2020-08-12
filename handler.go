@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func mapHandler(pathToUrls map[string]string , fallback http.Handler) http.HandlerFunc{
-	return func(w http.ResponseWriter, r *http.Request){
+func MapHandler(pathToUrls map[string]string, fallback http.Handler) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Method of Request: ", r.Method)
 		path := r.URL.Path
 		if dest, foundDest := pathToUrls[path]; foundDest {
