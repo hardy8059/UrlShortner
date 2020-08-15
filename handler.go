@@ -1,7 +1,10 @@
 package UrlShortner
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/go-yaml/yaml"
 	"net/http"
 )
 
@@ -15,4 +18,29 @@ func MapHandler(pathToUrls map[string]string, fallback http.Handler) http.Handle
 		}
 		fallback.ServeHTTP(w, r)
 	}
+}
+
+type pathUrl struct {
+	Path string `yaml:"path,omitempty", json:"path,omitempty"`
+	Url  string `json:"url,omitempty"`
+}
+
+func FileHandler(Urls []byte, fallback http.Handler, typeofFile string) (http.HandlerFunc, error) {
+	var pathUrls []pathUrl
+	var err error
+	if typeofFile == "yaml" {
+		err = yaml.Unmarshal(Urls, &pathUrls)
+	} else if typeofFile == "json" {
+		err = json.Unmarshal(Urls, &pathUrls)
+	} else {
+		return nil, errors.New("unable to parse the defined type. please give a yaml or json file")
+	}
+	if err != nil {
+		return nil, err
+	}
+	pathToUrls := make(map[string]string)
+	for _, u := range pathUrls {
+		pathToUrls[u.Path] = u.Url
+	}
+	return MapHandler(pathToUrls, fallback), nil
 }
