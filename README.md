@@ -1,6 +1,6 @@
 # UrlShortner
 
-This repo implements a url shortener.
+This repo implements a url shortner.
 It reads the urls from a config file in which they are defined in the form:
  - path (the url user enters)
  - url (the url to which we need to redirect)
