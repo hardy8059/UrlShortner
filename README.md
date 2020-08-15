@@ -10,7 +10,7 @@ Currently,  two handlers are implemented. Which handle following file format:
  - Yaml Files
  - Json Files
 
-![alt text](https://github.com/hardy8059/Quiz_game_using_golang/blob/master/Output%20Images/User%Configuration.PNG?raw=true)
+![alt text](https://github.com/hardy8059/UrlShortner/blob/master/Output%20Images/User%Configuration.PNG?raw=true)
 
 ### Packages Explored:
  - Json (https://golang.org/pkg/encoding/json/)
